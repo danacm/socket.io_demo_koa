@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>upload format</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <input type="file" id="upload">
+    <div>
+       <img width="100" id="img"> 
+    </div>
+    
+    <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"> </script>
+    <script type="text/javascript">
+        $('#upload').on('change', function (e) {
+            //console.log(e);
+            let _file = e.target.files[0],
+                formData = new FormData();
+            formData.append('myFile', _file);
+            $.ajax({
+                url: '/home/upload',
+                type: 'POST',
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    //console.log(data)
+                    $('#img').attr('src',data)
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>
